@@ -1,10 +1,15 @@
 package at.fh.swengb.gruber.homeexercise2
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 
-@Entity
-class note(val title: String, val content: String) {
+@Entity (tableName = "Notes",
+        foreignKeys = [ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["userid"],
+            onDelete = ForeignKey.CASCADE )])
+class note(val title: String, val content: String, val userid: Long ) {
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Long = 0
 }
+
